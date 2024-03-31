@@ -1,8 +1,7 @@
 package com.example.Portal_Recruitment.controller;
 
 import java.util.ArrayList;
-
-import org.hibernate.mapping.List;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -85,7 +84,7 @@ public class VacancyController {
 
     @GetMapping("vacancys")
     public ResponseEntity<Object> get() {
-        java.util.List<Vacancy> list =  vacancyRepository.findAll();
+        List<Vacancy> list =  vacancyRepository.findAll();
  
         return CustomResponse.generate(HttpStatus.OK, "Data Successfully Fetched", list);
     }
