@@ -1,5 +1,8 @@
 package com.example.Portal_Recruitment.controller;
 
+import java.util.ArrayList;
+
+import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,8 +41,9 @@ public class VacancyController {
         
         Vacancy result =vacancyRepository.save(vacancy);
 
+        //is present untuk mengecek apa datanya atau tidak 
         if (vacancyRepository.findById(result.getId()).isPresent()) {
-            return CustomResponse.generate(HttpStatus.OK, "Data Successfully Added");
+            return CustomResponse.generate(HttpStatus.CREATED, "Data Successfully Added");
         }
 
         return CustomResponse.generate(HttpStatus.BAD_REQUEST, "Error Adding Data");
@@ -81,7 +85,9 @@ public class VacancyController {
 
     @GetMapping("vacancys")
     public ResponseEntity<Object> get() {
-        return CustomResponse.generate(HttpStatus.OK, "Data Successfully Fetched", vacancyRepository.findAll());
+        java.util.List<Vacancy> list =  vacancyRepository.findAll();
+ 
+        return CustomResponse.generate(HttpStatus.OK, "Data Successfully Fetched", list);
     }
 
 }
