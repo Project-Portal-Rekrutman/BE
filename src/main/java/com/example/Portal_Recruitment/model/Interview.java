@@ -2,6 +2,8 @@ package com.example.Portal_Recruitment.model;
 
 import java.time.LocalDateTime;
 
+// import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "tb_tr_interview")
@@ -23,17 +26,15 @@ public class Interview {
     @JoinColumn(name = "apply_id", nullable = false, referencedColumnName = "id")
     private Apply apply;
 
-    @Column(name = "note")
-    private String note;
-
     @Column(name = "location")
     private String location;
+
 
     @Column(name = "schedule")
     private LocalDateTime schedule;
 
     @Column(name = "interview_status")
-    private String interviewSchedule;
+    private String interviewStatus;
 
     public Integer getId() {
         return id;
@@ -49,14 +50,6 @@ public class Interview {
 
     public void setApply(Apply apply) {
         this.apply = apply;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
     }
 
     public String getLocation() {
@@ -75,12 +68,12 @@ public class Interview {
         this.schedule = schedule;
     }
 
-    public String getInterviewSchedule() {
-        return interviewSchedule;
+    public String getInterviewStatus() {
+        return interviewStatus;
     }
 
-    public void setInterviewSchedule(String interviewSchedule) {
-        this.interviewSchedule = interviewSchedule;
+    public void setInterviewStatus(String interviewStatus) {
+        this.interviewStatus = interviewStatus;
     }
 
 }
