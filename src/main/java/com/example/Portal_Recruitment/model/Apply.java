@@ -32,9 +32,9 @@ public class Apply {
     @Column(name = "screening_date")
     private LocalDate screeningDate;
 
-    // @ManyToOne
-    // @JoinColumn(name = "participant_id")
-    // private Participant participant;
+    @ManyToOne
+    @JoinColumn(name = "participant_id")
+    private Participant participant;
 
     @ManyToOne
     // banyak vacancy_id  entitas saat ini dapat terhubung ke satu Vacancy.
