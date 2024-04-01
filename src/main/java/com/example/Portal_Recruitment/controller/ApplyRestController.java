@@ -25,6 +25,7 @@ import com.example.Portal_Recruitment.repository.VacancyRepository;
 public class ApplyRestController {
     @Autowired
     private ApplyRepository applyRepository;
+    
     @Autowired
     private VacancyRepository vacancyRepository;
 
