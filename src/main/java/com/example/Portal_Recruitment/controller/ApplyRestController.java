@@ -44,8 +44,8 @@ public class ApplyRestController {
        }
         apply.setScreeningDate(LocalDate.now());
         apply.setAppDate(LocalDate.now());
-        apply.setAppStatus("process");
-        apply.setScreeningStatus("process");
+        apply.setAppStatus("Process");
+        apply.setScreeningStatus("Process");
         apply.setVacancy(vacancy);
 
         applyRepository.save(apply);
