@@ -1,13 +1,12 @@
 package com.example.Portal_Recruitment.models;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -28,6 +27,8 @@ public class Interview {
     private String location;
     private LocalDateTime schedule;
     private String interview_status;
+    private Date interview_status_date;
+    private String interviewer_name;
     public Integer getId() {
         return id;
     }
@@ -64,7 +65,18 @@ public class Interview {
     public void setInterview_status(String interview_status) {
         this.interview_status = interview_status;
     }
+    public Date getInterview_status_date() {
+        return interview_status_date;
+    }
+    public void setInterview_status_date(Date interview_status_date) {
+        this.interview_status_date = interview_status_date;
+    }
+    public String getInterviewer_name() {
+        return interviewer_name;
+    }
+    public void setInterviewer_name(String interviewer_name) {
+        this.interviewer_name = interviewer_name;
+    }
 
-    
 }
 

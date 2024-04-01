@@ -1,5 +1,8 @@
 package com.example.Portal_Recruitment.controllers;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +18,6 @@ import com.example.Portal_Recruitment.models.Score;
 import com.example.Portal_Recruitment.repos.InterviewRepository;
 import com.example.Portal_Recruitment.repos.ScoreRepository;
 
-
 @RestController
 @RequestMapping("api")
 public class ScoreRestController {
@@ -26,7 +28,9 @@ public class ScoreRestController {
     private InterviewRepository interviewRepository;
 
     @PostMapping("score")
-        public ResponseEntity<Object> save(@RequestBody ScoreDTO scoreDTO){
+    public ResponseEntity<Object> save(@RequestBody ScoreDTO scoreDTO) {
+        Boolean checkDataExist = interviewRepository.findById(scoreDTO.getInterview_id()).isPresent();
+        if (checkDataExist) {
             Score score = new Score();
             score.setCompetency(scoreDTO.getCompetency());
             score.setCommunication(scoreDTO.getCommunication());
@@ -35,28 +39,30 @@ public class ScoreRestController {
             score.setAttitude(scoreDTO.getAttitude());
             score.setGrooming(scoreDTO.getGrooming());
             score.setInterview_id(scoreDTO.getInterview_id());
-            
+            scoreRepository.save(score);
+
             Interview interview = interviewRepository.findByIdInterview(score.getInterview_id());
 
-            Integer value = (score.getCompetency() + score.getCommunication() + score.getExperience() + 
-                            score.getEnthusiasm() + score.getAttitude() + score.getGrooming()) / 6;
+            Integer value = (score.getCompetency() + score.getCommunication() + score.getExperience() +
+                    score.getEnthusiasm() + score.getAttitude() + score.getGrooming()) / 6;
+
+            // Membuat objek Date untuk mendapatkan tanggal dan waktu saat ini
+            Date currentDate = new Date();
+
             if (value > 70) {
-                interview.setInterview_status("Passed");
+                interview.setInterview_status("passed");
+                interview.setInterview_status_date(currentDate);
                 interviewRepository.save(interview);
-            }else{
-                interview.setInterview_status("Failed");
+            } else {
+                interview.setInterview_status("failed");
+                interview.setInterview_status_date(currentDate);
                 interviewRepository.save(interview);
             }
 
-            if (interview.getInterview_status().equals("Passed") || interview.getInterview_status().equals("Failed")) {
-                return CustomResponse.generate(HttpStatus.INTERNAL_SERVER_ERROR, "Data cannot be changed!");
-            }
+            return CustomResponse.generate(HttpStatus.OK, "Data Submitted");
 
-            Score result = scoreRepository.save(score);
-            if (scoreRepository.findById(result.getId()).isPresent()) {
-                return CustomResponse.generate(HttpStatus.OK, "Data Submitted");
-            }
-
-            return CustomResponse.generate(HttpStatus.BAD_REQUEST, "Error Submit Data");
         }
+
+        return CustomResponse.generate(HttpStatus.BAD_REQUEST, "Data Doesn't Exist");
+    }
 }
