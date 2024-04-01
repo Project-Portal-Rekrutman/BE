@@ -1,4 +1,4 @@
-package com.example.Portal_Recruitment.controllers;
+package com.example.Portal_Recruitment.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Portal_Recruitment.dto.ScoreDTO;
 import com.example.Portal_Recruitment.handler.CustomResponse;
-import com.example.Portal_Recruitment.models.Interview;
-import com.example.Portal_Recruitment.models.Score;
-import com.example.Portal_Recruitment.repos.InterviewRepository;
-import com.example.Portal_Recruitment.repos.ScoreRepository;
+import com.example.Portal_Recruitment.model.Interview;
+import com.example.Portal_Recruitment.model.Score;
+import com.example.Portal_Recruitment.repository.InterviewRepository;
+import com.example.Portal_Recruitment.repository.ScoreRepository;
 
 @RestController
 @RequestMapping("api")

@@ -1,9 +1,9 @@
-package com.example.Portal_Recruitment.repos;
+package com.example.Portal_Recruitment.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.example.Portal_Recruitment.models.Interview;
+import com.example.Portal_Recruitment.model.Interview;
 
 
 public interface InterviewRepository extends JpaRepository<Interview, Integer>{

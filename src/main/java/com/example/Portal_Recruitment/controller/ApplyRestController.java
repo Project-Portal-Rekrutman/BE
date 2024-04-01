@@ -1,4 +1,4 @@
-package com.example.Portal_Recruitment.controllers;
+package com.example.Portal_Recruitment.controller;
 
 import java.util.Date;
 
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Portal_Recruitment.handler.CustomResponse;
-import com.example.Portal_Recruitment.models.Apply;
-import com.example.Portal_Recruitment.repos.ApplyRepository;
+import com.example.Portal_Recruitment.model.Apply;
+import com.example.Portal_Recruitment.repository.ApplyRepository;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 

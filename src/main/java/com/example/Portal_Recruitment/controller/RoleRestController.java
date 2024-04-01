@@ -1,4 +1,4 @@
-package com.example.Portal_Recruitment.controllers;
+package com.example.Portal_Recruitment.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Portal_Recruitment.handler.CustomResponse;
-import com.example.Portal_Recruitment.repos.RoleRepository;
+import com.example.Portal_Recruitment.repository.RoleRepository;
 
 @RestController
 @RequestMapping("api")

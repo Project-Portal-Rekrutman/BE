@@ -1,4 +1,4 @@
-package com.example.Portal_Recruitment.models;
+package com.example.Portal_Recruitment.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
