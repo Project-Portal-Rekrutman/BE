@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_m_vacancy")
+@Table(name = "tb_tr_apply")
 public class Apply {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,11 +34,12 @@ public class Apply {
     @ManyToOne
     @JoinColumn(name = "participant_id")
     private Participant participant;
-
-    @ManyToOne
     // banyak vacancy_id  entitas saat ini dapat terhubung ke satu Vacancy.
-    @JoinColumn(name = "vacancy_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "vacancy_id")
     private Vacancy vacancy;
+
+  
 
     public Integer getId() {
         return id;
