@@ -20,7 +20,7 @@ public class ApplyRestController {
     @Autowired
     private ApplyRepository applyRepository;
 
-    @PostMapping("applies")
+    @PostMapping("apply")
     public ResponseEntity<Object> save(@RequestBody Apply apply) {
         // TODO: process POST request
         Boolean result = applyRepository.findById(apply.getId()).isPresent();
