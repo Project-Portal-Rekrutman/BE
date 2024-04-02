@@ -79,8 +79,8 @@ public class Apply {
         return screeningDate;
     }
 
-    public void setScreeningDate(LocalDate screeningDate) {
-        this.screeningDate = screeningDate;
+    public void setScreeningDate(LocalDate currentDate) {
+        this.screeningDate = currentDate;
     }
 
     public Vacancy getVacancy() {

@@ -30,16 +30,10 @@ public class ApplyRestController {
         // TODO: process POST request
         Boolean result = applyRepository.findById(apply.getId()).isPresent();
         if (result) {
-            // Membuat objek Date untuk mendapatkan tanggal dan waktu saat ini
-            Date currentDate = new Date();
 
             Apply app = applyRepository.findByIdApply(apply.getId());
-            // app.setVacancy_id(apply.getVacancy_id());
-            // app.setParticipant_id(apply.getParticipant_id());
-            // app.setApplication_status(apply.getApplication_status());
-            // app.setApplication_date(apply.getApplication_date());
-            app.setScreening_status(apply.getScreening_status());
-            app.setScreening_date(currentDate);
+            app.setScreeningStatus(apply.getScreeningStatus());
+            app.setScreeningDate(LocalDate.now());
 
             applyRepository.save(app);
 

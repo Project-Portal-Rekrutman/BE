@@ -1,6 +1,7 @@
 package com.example.Portal_Recruitment.controller;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,16 +47,14 @@ public class ScoreRestController {
             Integer value = (score.getCompetency() + score.getCommunication() + score.getExperience() +
                     score.getEnthusiasm() + score.getAttitude() + score.getGrooming()) / 6;
 
-            // Membuat objek Date untuk mendapatkan tanggal dan waktu saat ini
-            Date currentDate = new Date();
 
             if (value > 70) {
-                interview.setInterview_status("passed");
-                interview.setInterview_status_date(currentDate);
+                interview.setInterviewStatus("passed");
+                interview.setInterviewStatusDate(LocalDate.now());
                 interviewRepository.save(interview);
             } else {
-                interview.setInterview_status("failed");
-                interview.setInterview_status_date(currentDate);
+                interview.setInterviewStatus("failed");
+                interview.setInterviewStatusDate(LocalDate.now());
                 interviewRepository.save(interview);
             }
 
