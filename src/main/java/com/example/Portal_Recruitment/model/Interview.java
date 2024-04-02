@@ -1,82 +1,100 @@
 package com.example.Portal_Recruitment.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
+// import java.time.LocalDateTime;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.JoinColumn;
 
 @Entity
-@Table( name = "tb_tr_interview")
+@Table(name = "tb_tr_interview")
 public class Interview {
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
-    @JsonIgnore
-    @OneToOne( mappedBy = "interview")
-    private Score interviewScores;
-    
-    private Integer apply_id;
+    @OneToOne
+    @JoinColumn(name = "apply_id", nullable = false, referencedColumnName = "id")
+    private Apply apply;
+
+    @Column(name = "location")
     private String location;
+
+    @Column(name = "schedule")
     private LocalDateTime schedule;
-    private String interview_status;
-    private Date interview_status_date;
-    private String interviewer_name;
+
+    @Column(name = "interviewer_name")
+    private String inteviewerName;
+
+    @Column(name = "interview_status")
+    private String interviewStatus;
+
+    @Column(name = "interview_status_date")
+    private LocalDate interviewStatusDate;
+
     public Integer getId() {
         return id;
     }
+
     public void setId(Integer id) {
         this.id = id;
     }
-    public Score getInterviewScores() {
-        return interviewScores;
+
+    public Apply getApply() {
+        return apply;
     }
-    public void setInterviewScores(Score interviewScores) {
-        this.interviewScores = interviewScores;
+
+    public void setApply(Apply apply) {
+        this.apply = apply;
     }
-    public Integer getApply_id() {
-        return apply_id;
-    }
-    public void setApply_id(Integer apply_id) {
-        this.apply_id = apply_id;
-    }
+
     public String getLocation() {
         return location;
     }
+
     public void setLocation(String location) {
         this.location = location;
     }
+
     public LocalDateTime getSchedule() {
         return schedule;
     }
+
     public void setSchedule(LocalDateTime schedule) {
         this.schedule = schedule;
     }
-    public String getInterview_status() {
-        return interview_status;
+
+    public String getInterviewStatus() {
+        return interviewStatus;
     }
-    public void setInterview_status(String interview_status) {
-        this.interview_status = interview_status;
+
+    public void setInterviewStatus(String interviewStatus) {
+        this.interviewStatus = interviewStatus;
     }
-    public Date getInterview_status_date() {
-        return interview_status_date;
+
+    public String getInteviewerName() {
+        return inteviewerName;
     }
-    public void setInterview_status_date(Date interview_status_date) {
-        this.interview_status_date = interview_status_date;
+
+    public void setInteviewerName(String inteviewerName) {
+        this.inteviewerName = inteviewerName;
     }
-    public String getInterviewer_name() {
-        return interviewer_name;
+
+    public LocalDate getInterviewStatusDate() {
+        return interviewStatusDate;
     }
-    public void setInterviewer_name(String interviewer_name) {
-        this.interviewer_name = interviewer_name;
+
+    public void setInterviewStatusDate(LocalDate interviewStatusDate) {
+        this.interviewStatusDate = interviewStatusDate;
     }
 
 }
-

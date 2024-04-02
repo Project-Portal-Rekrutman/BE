@@ -2,67 +2,93 @@ package com.example.Portal_Recruitment.model;
 
 import java.util.Date;
 
+import java.time.LocalDate;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_tr_apply")
 public class Apply {
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
-    private Integer vacancy_id;
-    private Integer participant_id;
-    private String application_status;
-    private Date application_date;
-    private String screening_status;
-    private Date screening_date;
+    @Column(name = "application_status")
+    private String appStatus;
+
+    @Column(name = "application_date")
+    private LocalDate appDate;
+
+    @Column(name = "screening_status")
+    private String screeningStatus;
+
+    @Column(name = "screening_date")
+    private LocalDate screeningDate;
+
+    @ManyToOne
+    @JoinColumn(name = "participant_id")
+    private Participant participant;
+    // banyak vacancy_id  entitas saat ini dapat terhubung ke satu Vacancy.
+    @ManyToOne
+    @JoinColumn(name = "vacancy_id")
+    private Vacancy vacancy;
+
+  
 
     public Integer getId() {
         return id;
     }
+
     public void setId(Integer id) {
         this.id = id;
     }
-    public Integer getVacancy_id() {
-        return vacancy_id;
+
+    public String getAppStatus() {
+        return appStatus;
     }
-    public void setVacancy_id(Integer vacancy_id) {
-        this.vacancy_id = vacancy_id;
+
+    public void setAppStatus(String appStatus) {
+        this.appStatus = appStatus;
     }
-    public Integer getParticipant_id() {
-        return participant_id;
+
+    public LocalDate getAppDate() {
+        return appDate;
     }
-    public void setParticipant_id(Integer participant_id) {
-        this.participant_id = participant_id;
+
+    public void setAppDate(LocalDate appDate) {
+        this.appDate = appDate;
     }
-    public String getApplication_status() {
-        return application_status;
+
+    public String getScreeningStatus() {
+        return screeningStatus;
     }
-    public void setApplication_status(String application_status) {
-        this.application_status = application_status;
+
+    public void setScreeningStatus(String screeningStatus) {
+        this.screeningStatus = screeningStatus;
     }
-    public Date getApplication_date() {
-        return application_date;
+
+    public LocalDate getScreeningDate() {
+        return screeningDate;
     }
-    public void setApplication_date(Date application_date) {
-        this.application_date = application_date;
+
+    public void setScreeningDate(LocalDate screeningDate) {
+        this.screeningDate = screeningDate;
     }
-    public String getScreening_status() {
-        return screening_status;
+
+    public Vacancy getVacancy() {
+        return vacancy;
     }
-    public void setScreening_status(String screening_status) {
-        this.screening_status = screening_status;
-    }
-    public Date getScreening_date() {
-        return screening_date;
-    }
-    public void setScreening_date(Date screening_date) {
-        this.screening_date = screening_date;
+
+    public void setVacancy(Vacancy vacancy) {
+        this.vacancy = vacancy;
     }
 
     
