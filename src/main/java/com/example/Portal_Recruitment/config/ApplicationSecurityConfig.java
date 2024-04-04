@@ -26,22 +26,22 @@ import org.springframework.web.filter.CorsFilter;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ApplicationSecurityConfig {
 
-    // @Autowired
-    // private MyUserDetails myUserDetails;
+    @Autowired
+    private MyUserDetails myUserDetails;
 
-    // @Autowired  
-    // private JwtAuthenticationEntryPoint authenticationEntryPoint;
+    @Autowired  
+    private JwtAuthenticationEntryPoint authenticationEntryPoint;
 
-    // @Autowired
-    // private JwtTokenFilter jwtTokenFilter;
+    @Autowired
+    private JwtTokenFilter jwtTokenFilter;
 
-    // @Bean
-    // public AuthenticationProvider authenticationProvider() {
-    //     DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-    //     authProvider.setUserDetailsService(myUserDetails);
-    //     authProvider.setPasswordEncoder(passwordEncoder());
-    //     return authProvider;
-    // }
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(myUserDetails);
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
+    }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
@@ -62,15 +62,14 @@ public class ApplicationSecurityConfig {
                     .authorizeRequests((requests) -> requests
                             .antMatchers("/account/authenticating", "/account/register", "/account/forgot-password")
                             .authenticated()
-                            // .antMatchers("/api/account/forgot-password").permitAll()
-                            // .antMatchers("/api/regions").hasAuthority("Staff")
+                            .antMatchers("/api/send/application").hasAuthority("jobseeker")
                             .antMatchers("/api/vacancy").permitAll()
                             .anyRequest().permitAll()
                     )
-                    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-                    // .and()
-                    // .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
-                    // .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint);
+                    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .and()
+                    .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
+                    .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint);
                     
             return http.build();
         } catch (Exception e) {
