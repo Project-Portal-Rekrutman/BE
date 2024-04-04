@@ -10,7 +10,15 @@ public class RequestEducation {
     private String name_major;
     private Integer degree_id;
     private String name_degree;
-    private Integer gpa;
+    private Double gpa;
+
+    public Integer getParticipant_id() {
+        return participant_id;
+    }
+
+    public void setParticipant_id(Integer participant_id) {
+        this.participant_id = participant_id;
+    }
 
     public Integer getEducation_id() {
         return education_id;
@@ -76,21 +84,12 @@ public class RequestEducation {
         this.name_degree = name_degree;
     }
 
-    public Integer getParticipant_id() {
-        return participant_id;
-    }
-
-    public void setParticipant_id(Integer participant_id) {
-        this.participant_id = participant_id;
-    }
-
-    public Integer getGpa() {
+    public Double getGpa() {
         return gpa;
     }
 
-    public void setGpa(Integer gpa) {
+    public void setGpa(Double gpa) {
         this.gpa = gpa;
     }
-
 
 }

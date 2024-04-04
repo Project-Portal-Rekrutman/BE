@@ -1,7 +1,5 @@
 package com.example.Portal_Recruitment.model;
 
-import java.text.DecimalFormat;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +18,7 @@ public class ParticipantEducation {
     private Integer id;
 
     @Column(name = "gpa")
-    private DecimalFormat gpa;
+    private Double gpa;
 
     @ManyToOne
     @JoinColumn(name = "academic_id")
@@ -33,18 +31,10 @@ public class ParticipantEducation {
     public ParticipantEducation() {
     }
 
-    public ParticipantEducation(Integer id, DecimalFormat gpa, Academic academic, Participant participant) {
+    public ParticipantEducation(Integer id, Double gpa, Academic academic, Participant participant) {
         this.id = id;
         this.gpa = gpa;
         this.academic = academic;
-        this.participant = participant;
-    }
-
-    public Participant getParticipant() {
-        return participant;
-    }
-
-    public void setParticipant(Participant participant) {
         this.participant = participant;
     }
 
@@ -56,11 +46,11 @@ public class ParticipantEducation {
         this.id = id;
     }
 
-    public DecimalFormat getGpa() {
+    public Double getGpa() {
         return gpa;
     }
 
-    public void setGpa(DecimalFormat gpa) {
+    public void setGpa(Double gpa) {
         this.gpa = gpa;
     }
 
@@ -71,4 +61,13 @@ public class ParticipantEducation {
     public void setAcademic(Academic academic) {
         this.academic = academic;
     }
+
+    public Participant getParticipant() {
+        return participant;
+    }
+
+    public void setParticipant(Participant participant) {
+        this.participant = participant;
+    }
+
 }
