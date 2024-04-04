@@ -31,6 +31,6 @@ public interface ApplyRepository extends JpaRepository<Apply, Integer> {
             "WHERE ap.id = ?1", nativeQuery = true)
     public List<Object[]> getProgress(Integer Id);
 
-    @Query(value = "Select * from tb_tr_apply where participant_id= ?1", nativeQuery = true)
-    public Apply getIdParticipant(Integer Id);
+    @Query(value = "Select * from tb_tr_apply a where participant_id= ?1", nativeQuery = true)
+    public List<Apply> getIdParticipant(Integer Id);
 }

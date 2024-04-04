@@ -1,6 +1,7 @@
 package com.example.Portal_Recruitment.controller;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -76,9 +77,12 @@ public class ApplyRestController {
         com.example.Portal_Recruitment.model.User user = userRepository.getrole(username);
         if (user.getRole().getName().equals("admin") || user.getRole().getName().equals("recruiter")) {
             return CustomResponse.generate(HttpStatus.OK, "Data Successfully Fetched", applyRepository.findAll());
+        }else{
+            Participant participant = participantRepository.findUser(user.getEmail());
+            List<Apply> applies = applyRepository.getIdParticipant(participant.getId());
+        return CustomResponse.generate(HttpStatus.OK, "Data Successfully Fetched", applies);
         }
-        Participant participant = participantRepository.findUser(user.getEmail());
-        return CustomResponse.generate(HttpStatus.OK, "Data Successfully Fetched", applyRepository.getIdParticipant(participant.getId()));
+        
     }
     
     @PostMapping("send/application")
