@@ -12,5 +12,11 @@ public interface UserRepository extends JpaRepository<User, Integer>{
             SELECT u FROM User u WHERE u.email = ?1
             """)
     public User authenticate(String email);
+
+
+    @Query("""
+        SELECT u FROM User u  JOIN u.role r WHERE u.email = ?1
+        """)
+public User getrole(String email);
   
 }

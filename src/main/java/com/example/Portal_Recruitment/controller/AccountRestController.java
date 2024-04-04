@@ -25,6 +25,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.Portal_Recruitment.dto.Login;
 import com.example.Portal_Recruitment.handler.CustomResponse;
 import com.example.Portal_Recruitment.model.JwtResponse;
+import com.example.Portal_Recruitment.model.Role;
+import com.example.Portal_Recruitment.model.User;
+import com.example.Portal_Recruitment.repository.RoleRepository;
 
 
 
@@ -34,7 +37,8 @@ public class AccountRestController {
     @Autowired
     private com.example.Portal_Recruitment.repository.UserRepository userRepository;
 
-
+    @Autowired
+    private RoleRepository roleRepository;
    
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -124,8 +128,13 @@ public class AccountRestController {
             // myUserDetails = (MyUserDetails) myUserDetails.loadUserByUsername(login.getEmail());
 
 		final String token = jwtTokenUtil.generateToken(userDetails);
+          
+        String username = jwtTokenUtil.getUsernameFromToken(token);
+        User user = userRepository.getrole(username);
 
-		return CustomResponse.generate(HttpStatus.OK, "Login Sukses", token, userDetails.getAuthorities());
+
+
+		return CustomResponse.generate(HttpStatus.OK, "Login Sukses", token, user.getRole().getName() );
         } catch (Exception e) {
             return CustomResponse.generate(HttpStatus.BAD_REQUEST, "Login Failed", null);
         }
