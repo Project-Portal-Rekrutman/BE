@@ -77,8 +77,16 @@ public class Apply {
         return screeningDate;
     }
 
-    public void setScreeningDate(LocalDate currentDate) {
-        this.screeningDate = currentDate;
+    public Participant getParticipant() {
+        return participant;
+    }
+
+    public void setParticipant(Participant participant) {
+        this.participant = participant;
+    }
+
+    public void setScreeningDate(LocalDate screeningDate) {
+        this.screeningDate = screeningDate;
     }
 
     public Vacancy getVacancy() {

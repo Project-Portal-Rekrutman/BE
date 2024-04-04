@@ -22,4 +22,12 @@ public class CustomResponse {
         response.put("message", message);
         return new ResponseEntity<Object>(response, httpStatus);
     }
+    public static ResponseEntity<Object> generate(HttpStatus httpStatus, String message,  String token, Object data){
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", httpStatus);
+        response.put("message", message);
+        response.put("data", data);
+           response.put("token", token);
+        return new ResponseEntity<Object>(response, httpStatus);
+    }
 }
