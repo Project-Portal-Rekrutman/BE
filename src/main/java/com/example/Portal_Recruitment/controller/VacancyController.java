@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -76,10 +77,14 @@ public class VacancyController {
         vacancy.setStatus(requestVacancy.getStatus());
         vacancy.setQualification(requestVacancy.getQualification());
         vacancy.setSalary(requestVacancy.getSalary());
+        vacancy.setImage(requestVacancy.getImage());
+        vacancy.setJobType(requestVacancy.getJobType());
+        vacancy.setLocation(requestVacancy.getLocation());
+        vacancy.setTitle(requestVacancy.getTitle());
 
         vacancyRepository.save(vacancy);
 
-        return CustomResponse.generate(HttpStatus.OK, "Data Successfully Updated Data");
+        return CustomResponse.generate(HttpStatus.OK, "Data Successfully Updated Data",vacancy);
     }
 
     @GetMapping("vacancys")
@@ -87,6 +92,13 @@ public class VacancyController {
         List<Vacancy> list =  vacancyRepository.findAll();
  
         return CustomResponse.generate(HttpStatus.OK, "Data Successfully Fetched", list);
+    }
+
+     @DeleteMapping("vacancy/{id}")
+    public ResponseEntity<Object> delete(@PathVariable(required = true, name = "id") Integer id) {
+       vacancyRepository.deleteById(id);
+        return CustomResponse.generate(HttpStatus.OK, "id berhasil dihapus",
+                !vacancyRepository.findById(id).isPresent());
     }
 
 }
