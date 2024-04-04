@@ -68,7 +68,17 @@ public class ApplyRestController {
     
     @GetMapping("applies")
     public ResponseEntity<Object> get() {
-        return CustomResponse.generate(HttpStatus.OK, "Data Successfully Fetched", applyRepository.findAll());
+        final String requestTokenHeader = request.getHeader("Authorization");        
+		String username = null;
+		String jwtToken = null;
+        jwtToken = requestTokenHeader.substring(7);
+        username = jwtTokenUtil.getUsernameFromToken(jwtToken);
+        com.example.Portal_Recruitment.model.User user = userRepository.getrole(username);
+        if (user.getRole().getName().equals("admin") || user.getRole().getName().equals("Recruiter")) {
+            return CustomResponse.generate(HttpStatus.OK, "Data Successfully Fetched", applyRepository.findAll());
+        }
+        Participant participant = participantRepository.findUser(user.getEmail());
+        return CustomResponse.generate(HttpStatus.OK, "Data Successfully Fetched", applyRepository.getIdParticipant(participant.getId()));
     }
     
     @PostMapping("send/application")
