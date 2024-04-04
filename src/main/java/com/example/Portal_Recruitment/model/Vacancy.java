@@ -41,9 +41,28 @@ public class Vacancy {
     @Column(name = "status_job")
     private String status;
 
+    @Column(name = "image")
+    private String image;
+
     @JsonIgnore
     @OneToMany(mappedBy = "vacancy")
     private Set<Apply> applies;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Set<Apply> getApplies() {
+        return applies;
+    }
+
+    public void setApplies(Set<Apply> applies) {
+        this.applies = applies;
+    }
 
     public Integer getId() {
         return id;
