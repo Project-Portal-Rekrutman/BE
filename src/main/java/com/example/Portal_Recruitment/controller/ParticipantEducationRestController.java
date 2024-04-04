@@ -1,8 +1,11 @@
 package com.example.Portal_Recruitment.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,10 +67,17 @@ public class ParticipantEducationRestController {
             participantEducation.setGpa(requestEducation.getGpa());
             participantEducationRepository.save(participantEducation);
 
-            return CustomResponse.generate(HttpStatus.CREATED, "Successfully created or updated education details");
-            
+            return CustomResponse.generate(HttpStatus.CREATED, "Successfully created education details");
+
         }
         return CustomResponse.generate(HttpStatus.NOT_FOUND, "Participant not found");
     }
-}
 
+    @GetMapping("educations")
+    public ResponseEntity<Object> get() {
+        List<ParticipantEducation> list = participantEducationRepository.findAll();
+
+        return CustomResponse.generate(HttpStatus.OK, "Data Successfully Fetched", list);
+    }
+
+}
