@@ -3,8 +3,8 @@ package com.example.Portal_Recruitment.dto;
 import java.sql.Date;
 
 public class RequestLicenseCertification {
-    private Integer license_certification_id;
     private Integer participant_id;
+    private Integer license_certification_id;
     private String name_license_certification;
     private String issuing_organization;
     private Date issued_date;
@@ -12,20 +12,20 @@ public class RequestLicenseCertification {
     private String credential_id;
     private String credential_url;
 
-    public Integer getLicense_certification_id() {
-        return license_certification_id;
-    }
-
-    public void setLicense_certification_id(Integer license_certification_id) {
-        this.license_certification_id = license_certification_id;
-    }
-
     public Integer getParticipant_id() {
         return participant_id;
     }
 
     public void setParticipant_id(Integer participant_id) {
         this.participant_id = participant_id;
+    }
+
+    public Integer getLicense_certification_id() {
+        return license_certification_id;
+    }
+
+    public void setLicense_certification_id(Integer license_certification_id) {
+        this.license_certification_id = license_certification_id;
     }
 
     public String getName_license_certification() {

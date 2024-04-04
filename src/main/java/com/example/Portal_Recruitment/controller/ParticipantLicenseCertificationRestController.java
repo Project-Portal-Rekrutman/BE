@@ -1,7 +1,5 @@
 package com.example.Portal_Recruitment.controller;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,12 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Portal_Recruitment.dto.RequestLicenseCertification;
 import com.example.Portal_Recruitment.handler.CustomResponse;
-import com.example.Portal_Recruitment.model.LicenseCertification;
-import com.example.Portal_Recruitment.model.Participant;
-import com.example.Portal_Recruitment.model.ParticipantLicenseCertification;
-import com.example.Portal_Recruitment.repository.LicenseCertificationRepository;
-import com.example.Portal_Recruitment.repository.ParticipantLicenseCertificationRepository;
-import com.example.Portal_Recruitment.repository.ParticipantRepository;
+import com.example.Portal_Recruitment.model.*;
+import com.example.Portal_Recruitment.repository.*;
 
 @RestController
 @RequestMapping("api")

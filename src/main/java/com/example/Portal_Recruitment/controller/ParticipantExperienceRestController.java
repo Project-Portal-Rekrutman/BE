@@ -1,7 +1,5 @@
 package com.example.Portal_Recruitment.controller;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.Portal_Recruitment.dto.RequestExperience;
 import com.example.Portal_Recruitment.handler.CustomResponse;
 import com.example.Portal_Recruitment.model.*;
-import com.example.Portal_Recruitment.repository.CompanyRepository;
-import com.example.Portal_Recruitment.repository.EmploymentTypeRepository;
-import com.example.Portal_Recruitment.repository.ExperienceRepository;
-import com.example.Portal_Recruitment.repository.ParticipantExperienceRepository;
-import com.example.Portal_Recruitment.repository.ParticipantRepository;
-import com.example.Portal_Recruitment.repository.PositionRepository;
+import com.example.Portal_Recruitment.repository.*;
 
 @RestController
 @RequestMapping("api")
@@ -48,12 +41,10 @@ public class ParticipantExperienceRestController {
 
         if (participantExists) {
             Company company = companyRepository.findById(requestExperience.getCompany_id())
-                    .orElseGet(
-                            () -> new Company(requestExperience.getCompany_id(), requestExperience.getName_company()));
+                    .orElseGet(() -> new Company(requestExperience.getCompany_id(), requestExperience.getName_company()));
 
             EmploymentType employmentType = employmentTypeRepository.findById(requestExperience.getEmployment_type_id())
-                    .orElseGet(() -> new EmploymentType(requestExperience.getEmployment_type_id(),
-                            requestExperience.getName_employment_type()));
+                    .orElseGet(() -> new EmploymentType(requestExperience.getEmployment_type_id(),requestExperience.getName_employment_type()));
 
             Position position = positionRepository.findById(requestExperience.getPosition_id())
                     .orElseGet(() -> new Position(requestExperience.getPosition_id(),

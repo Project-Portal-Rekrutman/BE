@@ -1,7 +1,5 @@
 package com.example.Portal_Recruitment.controller;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,14 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Portal_Recruitment.dto.RequestSkill;
 import com.example.Portal_Recruitment.handler.CustomResponse;
-import com.example.Portal_Recruitment.model.Participant;
-import com.example.Portal_Recruitment.model.ParticipantSkill;
-import com.example.Portal_Recruitment.model.Skill;
-import com.example.Portal_Recruitment.model.SkillType;
-import com.example.Portal_Recruitment.repository.ParticipantRepository;
-import com.example.Portal_Recruitment.repository.ParticipantSkillRepository;
-import com.example.Portal_Recruitment.repository.SkillRepository;
-import com.example.Portal_Recruitment.repository.SkillTypeRepository;
+import com.example.Portal_Recruitment.model.*;
+import com.example.Portal_Recruitment.repository.*;
 
 @RestController
 @RequestMapping("api")
@@ -48,6 +40,7 @@ public class ParticipantSkillRestController {
             skillType = skillTypeRepository.save(skillType);
 
             Skill skill = new Skill();
+            skill.setName(requestSkill.getName_skill());
             skill.setSkillType(skillType);
             skill = skillRepository.save(skill);
 
