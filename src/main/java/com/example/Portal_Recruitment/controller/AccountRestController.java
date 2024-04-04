@@ -148,8 +148,10 @@ public class AccountRestController {
             // myUserDetails.loadUserByUsername(login.getEmail());
 
             final String token = jwtTokenUtil.generateToken(userDetails);
+            String username = jwtTokenUtil.getUsernameFromToken(token);
+            com.example.Portal_Recruitment.model.User user = userRepository.getrole(username);
 
-            return CustomResponse.generate(HttpStatus.OK, "Login Sukses", token, userDetails.getAuthorities());
+            return CustomResponse.generate(HttpStatus.OK, "Login Sukses", token, user.getRole().getName());
         } catch (Exception e) {
             return CustomResponse.generate(HttpStatus.BAD_REQUEST, "Login Failed", null);
         }
