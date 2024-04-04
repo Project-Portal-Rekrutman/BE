@@ -12,5 +12,8 @@ public interface UserRepository extends JpaRepository<User, Integer>{
             SELECT u FROM User u WHERE u.email = ?1
             """)
     public User authenticate(String email);
+
+    @Query(value = "SELECT email FROM tb_m_user WHERE email = ?1", nativeQuery = true)
+    public String findEmail(String email);
   
 }
