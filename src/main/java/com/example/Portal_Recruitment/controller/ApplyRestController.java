@@ -24,6 +24,7 @@ import com.example.Portal_Recruitment.model.Participant;
 import com.example.Portal_Recruitment.model.User;
 import com.example.Portal_Recruitment.model.Vacancy;
 import com.example.Portal_Recruitment.repository.ApplyRepository;
+import com.example.Portal_Recruitment.repository.CompletionRepository;
 import com.example.Portal_Recruitment.repository.ParticipantRepository;
 import com.example.Portal_Recruitment.repository.UserRepository;
 import com.example.Portal_Recruitment.repository.VacancyRepository;
@@ -34,6 +35,8 @@ public class ApplyRestController {
     @Autowired
     private ApplyRepository applyRepository;
 
+    @Autowired 
+    private CompletionRepository completionRepository;
     @Autowired 
     private JwtTokenUtil jwtTokenUtil;
 
@@ -100,9 +103,14 @@ public class ApplyRestController {
         Vacancy vacancy = vacancyRepository.FindVacancy(jobid);
 
        if (vacancy == null) {
-        return CustomResponse.generate(HttpStatus.OK, "Oops! Vacancy not found for jobid: " + jobid);
+        return CustomResponse.generate(HttpStatus.OK, "Oops! Vacancy not found for jobid: " );
        }else if (vacancy.getStatus().equals("NonAktif")) {
         return CustomResponse.generate(HttpStatus.OK, "Upps Vacancy Notfound");
+       }
+       Integer sum = completionRepository.getSum(participant.getId());
+
+       if (sum < 70) {
+        return CustomResponse.generate(HttpStatus.BAD_REQUEST, " Diharapkan lengkapi Profile anda ");
        }
         apply.setScreeningDate(LocalDate.now());
         apply.setAppDate(LocalDate.now());
