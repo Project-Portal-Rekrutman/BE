@@ -1,6 +1,7 @@
 package com.example.Portal_Recruitment.controller;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -61,7 +62,20 @@ public class ApplyRestController {
 
     @GetMapping("applies")
     public ResponseEntity<Object> get() {
-        return CustomResponse.generate(HttpStatus.OK, "Data Successfully Fetched", applyRepository.findAll());
+        final String requestTokenHeader = request.getHeader("Authorization");        
+		String username = null;
+		String jwtToken = null;
+        jwtToken = requestTokenHeader.substring(7);
+        username = jwtTokenUtil.getUsernameFromToken(jwtToken);
+        com.example.Portal_Recruitment.model.User user = userRepository.getrole(username);
+        if (user.getRole().getName().equals("admin") || user.getRole().getName().equals("recruiter")) {
+            return CustomResponse.generate(HttpStatus.OK, "Data Successfully Fetched", applyRepository.findAll());
+        }else{
+            Participant participant = participantRepository.findUser(user.getEmail());
+            List<Apply> applies = applyRepository.getIdParticipant(participant.getId());
+        return CustomResponse.generate(HttpStatus.OK, "Data Successfully Fetched", applies);
+        }
+        
     }
 
     @PostMapping("send/application")

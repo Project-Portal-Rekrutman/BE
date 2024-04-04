@@ -34,9 +34,6 @@ import com.example.Portal_Recruitment.repository.CompletionRepository;
 import com.example.Portal_Recruitment.repository.ParticipantRepository;
 import com.example.Portal_Recruitment.repository.RoleRepository;
 
-
-
-
 @RestController
 @RequestMapping("api")
 public class AccountRestController {
@@ -149,14 +146,11 @@ public class AccountRestController {
             // myUserDetails = (MyUserDetails)
             // myUserDetails.loadUserByUsername(login.getEmail());
 
-		final String token = jwtTokenUtil.generateToken(userDetails);
-          
-        String username = jwtTokenUtil.getUsernameFromToken(token);
-        User user = userRepository.getrole(username);
+            final String token = jwtTokenUtil.generateToken(userDetails);
+            String username = jwtTokenUtil.getUsernameFromToken(token);
+            com.example.Portal_Recruitment.model.User user = userRepository.getrole(username);
 
-
-
-		return CustomResponse.generate(HttpStatus.OK, "Login Sukses", token, user.getRole().getName() );
+            return CustomResponse.generate(HttpStatus.OK, "Login Sukses", token, user.getRole().getName());
         } catch (Exception e) {
             return CustomResponse.generate(HttpStatus.BAD_REQUEST, "Login Failed", null);
         }
