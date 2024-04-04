@@ -7,7 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_m_user")
@@ -29,6 +32,10 @@ public class User {
 
     @Column(name = "name")
     private String name;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "user")
+    private Participant participant;
    
     public Integer getId() {
         return id;
@@ -68,5 +75,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-    }  
+    }
+
+    public Participant getParticipant() {
+        return participant;
+    }
+
+    public void setParticipant(Participant participant) {
+        this.participant = participant;
+    }
+    
 }

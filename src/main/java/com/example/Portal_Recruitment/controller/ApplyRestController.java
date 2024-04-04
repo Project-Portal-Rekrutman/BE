@@ -1,6 +1,5 @@
 package com.example.Portal_Recruitment.controller;
 
-import java.util.Date;
 import java.time.LocalDate;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.Portal_Recruitment.handler.CustomResponse;
 import com.example.Portal_Recruitment.model.Apply;
 import com.example.Portal_Recruitment.repository.ApplyRepository;
-import org.springframework.web.bind.annotation.RequestBody;
 import com.example.Portal_Recruitment.model.Vacancy;
 import com.example.Portal_Recruitment.config.JwtTokenUtil;
 import com.example.Portal_Recruitment.dto.RequesApply;
@@ -50,18 +50,7 @@ public class ApplyRestController {
             return CustomResponse.generate(HttpStatus.INTERNAL_SERVER_ERROR, "Data is NULL");
         }
     }
-    @Autowired 
-    private JwtTokenUtil jwtTokenUtil;
-    @Autowired
-    private VacancyRepository vacancyRepository;
-     @Autowired
-    private HttpServletRequest request;
-
-    @Autowired 
-    private ParticipantRepository participantRepository;
-    @Autowired
-    private UserRepository userRepository;
-
+    
     @GetMapping("applies")
     public ResponseEntity<Object> get() {
         return CustomResponse.generate(HttpStatus.OK, "Data Successfully Fetched", applyRepository.findAll());
@@ -95,6 +84,11 @@ public class ApplyRestController {
 
         applyRepository.save(apply);
         return CustomResponse.generate(HttpStatus.OK, "Data Successfully Added");
+    }
+
+    @GetMapping("apply/{id}")
+    public ResponseEntity<Object> getProgressList(@PathVariable Integer id) {
+        return CustomResponse.generate(HttpStatus.OK, "Data Successfully Fetched", applyRepository.getProgress(id));
     }
 }
     

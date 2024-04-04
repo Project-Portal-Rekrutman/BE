@@ -36,6 +36,10 @@ public class Participant {
     @OneToMany(mappedBy = "participant")
     private Set<Apply> applies;
 
+    @JsonIgnore
+    @OneToOne(mappedBy = "participant")
+    private Completion completion;
+
     public Integer getId() {
         return id;
     }
@@ -84,5 +88,12 @@ public class Participant {
         this.applies = applies;
     }
 
+    public Completion getCompletion() {
+        return completion;
+    }
+
+    public void setCompletion(Completion completion) {
+        this.completion = completion;
+    }
     
 }

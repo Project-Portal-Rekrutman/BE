@@ -1,7 +1,5 @@
 package com.example.Portal_Recruitment.model;
 
-import java.util.Date;
-
 import java.time.LocalDate;
 
 import javax.persistence.Column;
