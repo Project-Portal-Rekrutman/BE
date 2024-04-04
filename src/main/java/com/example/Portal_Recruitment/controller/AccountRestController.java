@@ -39,7 +39,7 @@ import com.example.Portal_Recruitment.repository.RoleRepository;
 public class AccountRestController {
     @Autowired
     private com.example.Portal_Recruitment.repository.UserRepository userRepository;
-
+   
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
