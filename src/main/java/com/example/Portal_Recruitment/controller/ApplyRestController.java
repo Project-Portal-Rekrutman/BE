@@ -52,7 +52,7 @@ public class ApplyRestController {
     @PostMapping("send/application")
     public ResponseEntity<Object>  Send(@RequestParam("jobid") Integer jobid){
         final String requestTokenHeader = request.getHeader("Authorization");        
-		String username = null;
+		String username = null; 
 		String jwtToken = null;
         jwtToken = requestTokenHeader.substring(7);
         username = jwtTokenUtil.getUsernameFromToken(jwtToken);
