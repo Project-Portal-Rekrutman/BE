@@ -1,5 +1,6 @@
 package com.example.Portal_Recruitment.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 // import java.time.LocalDateTime;
@@ -9,10 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
+import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name = "tb_tr_interview")
@@ -29,12 +29,17 @@ public class Interview {
     @Column(name = "location")
     private String location;
 
-
     @Column(name = "schedule")
     private LocalDateTime schedule;
 
+    @Column(name = "interviewer_name")
+    private String inteviewerName;
+
     @Column(name = "interview_status")
     private String interviewStatus;
+
+    @Column(name = "interview_status_date")
+    private LocalDate interviewStatusDate;
 
     public Integer getId() {
         return id;
@@ -74,6 +79,22 @@ public class Interview {
 
     public void setInterviewStatus(String interviewStatus) {
         this.interviewStatus = interviewStatus;
+    }
+
+    public String getInteviewerName() {
+        return inteviewerName;
+    }
+
+    public void setInteviewerName(String inteviewerName) {
+        this.inteviewerName = inteviewerName;
+    }
+
+    public LocalDate getInterviewStatusDate() {
+        return interviewStatusDate;
+    }
+
+    public void setInterviewStatusDate(LocalDate interviewStatusDate) {
+        this.interviewStatusDate = interviewStatusDate;
     }
 
 }

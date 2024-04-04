@@ -1,6 +1,7 @@
 package com.example.Portal_Recruitment.controller;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -32,23 +33,58 @@ import com.example.Portal_Recruitment.repository.VacancyRepository;
 public class ApplyRestController {
     @Autowired
     private ApplyRepository applyRepository;
+
     @Autowired 
     private JwtTokenUtil jwtTokenUtil;
+
     @Autowired
     private VacancyRepository vacancyRepository;
-     @Autowired
+
+    @Autowired
     private HttpServletRequest request;
 
     @Autowired 
     private ParticipantRepository participantRepository;
+    
     @Autowired
     private UserRepository userRepository;
 
+    @PostMapping("apply")
+    public ResponseEntity<Object> save(@RequestBody Apply apply) {
+        // TODO: process POST request
+        Boolean result = applyRepository.findById(apply.getId()).isPresent();
+        if (result) {
+
+            Apply app = applyRepository.findByIdApply(apply.getId());
+            app.setScreeningStatus(apply.getScreeningStatus());
+            app.setScreeningDate(LocalDate.now());
+
+            applyRepository.save(app);
+
+            return CustomResponse.generate(HttpStatus.OK, "Data Updated");
+        } else {
+            return CustomResponse.generate(HttpStatus.INTERNAL_SERVER_ERROR, "Data is NULL");
+        }
+    }
+    
     @GetMapping("applies")
     public ResponseEntity<Object> get() {
-        return CustomResponse.generate(HttpStatus.OK, "Data Successfully Fetched", applyRepository.findAll());
+        final String requestTokenHeader = request.getHeader("Authorization");        
+		String username = null;
+		String jwtToken = null;
+        jwtToken = requestTokenHeader.substring(7);
+        username = jwtTokenUtil.getUsernameFromToken(jwtToken);
+        com.example.Portal_Recruitment.model.User user = userRepository.getrole(username);
+        if (user.getRole().getName().equals("admin") || user.getRole().getName().equals("recruiter")) {
+            return CustomResponse.generate(HttpStatus.OK, "Data Successfully Fetched", applyRepository.findAll());
+        }else{
+            Participant participant = participantRepository.findUser(user.getEmail());
+            List<Apply> applies = applyRepository.getIdParticipant(participant.getId());
+        return CustomResponse.generate(HttpStatus.OK, "Data Successfully Fetched", applies);
+        }
+        
     }
-
+    
     @PostMapping("send/application")
     public ResponseEntity<Object>  Send(@RequestParam("jobid") Integer jobid){
         final String requestTokenHeader = request.getHeader("Authorization");        
@@ -70,8 +106,8 @@ public class ApplyRestController {
        }
         apply.setScreeningDate(LocalDate.now());
         apply.setAppDate(LocalDate.now());
-        apply.setAppStatus("process");
-        apply.setScreeningStatus("process");
+        apply.setAppStatus("Process");
+        apply.setScreeningStatus("Process");
         apply.setVacancy(vacancy);
         apply.setParticipant(participant);
 
@@ -79,4 +115,9 @@ public class ApplyRestController {
         return CustomResponse.generate(HttpStatus.OK, "Data Successfully Added");
     }
 
+    @GetMapping("apply/{id}")
+    public ResponseEntity<Object> getProgressList(@PathVariable Integer id) {
+        return CustomResponse.generate(HttpStatus.OK, "Data Successfully Fetched", applyRepository.getProgress(id));
+    }
 }
+    
