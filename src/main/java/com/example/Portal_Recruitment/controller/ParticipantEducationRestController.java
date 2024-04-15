@@ -75,9 +75,9 @@ public class ParticipantEducationRestController {
 
     @GetMapping("educations")
     public ResponseEntity<Object> get() {
-        List<ParticipantEducation> list = participantEducationRepository.findAll();
+        List<ParticipantEducation> educations = participantEducationRepository.getIdParticipant(1);
 
-        return CustomResponse.generate(HttpStatus.OK, "Data Successfully Fetched", list);
+        return CustomResponse.generate(HttpStatus.OK, "Data Successfully Fetched", educations);
     }
 
 }
