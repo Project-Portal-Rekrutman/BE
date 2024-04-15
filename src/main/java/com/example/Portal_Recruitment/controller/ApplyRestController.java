@@ -108,4 +108,15 @@ public class ApplyRestController {
         return CustomResponse.generate(HttpStatus.OK, "Data Successfully Added");
     }
 
+    @PostMapping("screening/update")
+    public ResponseEntity<Object> update(@RequestBody Apply apply){
+        Apply app = applyRepository.getIdApply(apply.getId());
+        app.setAppDate(LocalDate.now());
+        app.setAppStatus(apply.getAppStatus());
+        app.setScreeningStatus(apply.getScreeningStatus());
+        app.setScreeningDate(LocalDate.now());
+        applyRepository.save(app);
+
+        return CustomResponse.generate(HttpStatus.OK, "Data Successfully Update");
+    }
 }
