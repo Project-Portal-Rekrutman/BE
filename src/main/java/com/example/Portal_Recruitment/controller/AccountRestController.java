@@ -14,7 +14,6 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +29,7 @@ import com.example.Portal_Recruitment.model.Completion;
 import com.example.Portal_Recruitment.model.JwtResponse;
 import com.example.Portal_Recruitment.model.Participant;
 import com.example.Portal_Recruitment.model.Role;
+import com.example.Portal_Recruitment.model.User;
 import com.example.Portal_Recruitment.repository.CompletionRepository;
 import com.example.Portal_Recruitment.repository.ParticipantRepository;
 import com.example.Portal_Recruitment.repository.RoleRepository;
@@ -39,6 +39,9 @@ import com.example.Portal_Recruitment.repository.RoleRepository;
 public class AccountRestController {
     @Autowired
     private com.example.Portal_Recruitment.repository.UserRepository userRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
    
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -53,10 +56,6 @@ public class AccountRestController {
 
     @Autowired
     private ParticipantRepository participantRepository;
-
-    @Autowired
-    private RoleRepository roleRepository;
-
     @Autowired
     private CompletionRepository completionRepository;
 
