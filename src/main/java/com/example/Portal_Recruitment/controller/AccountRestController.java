@@ -215,7 +215,7 @@ public class AccountRestController {
             user.setEmail(register.getEmail());
             user.setPassword(passwordEncoder.encode(register.getPassword()));
             user.setName(register.getName());
-            Role role = roleRepository.findById(3).orElse(null);
+            Role role = roleRepository.findById(1).orElse(null);
             user.setRole(role);
             userRepository.save(user);
             Boolean resultUser = userRepository.findById(user.getId()).isPresent();
