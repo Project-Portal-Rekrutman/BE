@@ -1,8 +1,11 @@
 package com.example.Portal_Recruitment.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,4 +58,12 @@ public class ParticipantSkillRestController {
         return CustomResponse.generate(HttpStatus.NOT_FOUND, "Participant not found");
 
     }
+
+    @GetMapping("skills")
+    public ResponseEntity<Object> get() {
+        List<ParticipantSkill> skills = participantSkillRepository.getIdParticipant(1);
+
+        return CustomResponse.generate(HttpStatus.OK, "Data Successfully Fetched", skills);
+    }
+
 }

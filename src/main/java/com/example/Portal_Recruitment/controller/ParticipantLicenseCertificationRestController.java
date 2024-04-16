@@ -1,8 +1,11 @@
 package com.example.Portal_Recruitment.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,8 +31,9 @@ public class ParticipantLicenseCertificationRestController {
 
     @PostMapping("licensecertification")
     public ResponseEntity<Object> saveLicense(@RequestBody RequestLicenseCertification requestLicenseCertification) {
-        Boolean participantExists = participantRepository.findById(requestLicenseCertification.getParticipant_id()).isPresent();
-        
+        Boolean participantExists = participantRepository.findById(requestLicenseCertification.getParticipant_id())
+                .isPresent();
+
         if (participantExists) {
             LicenseCertification licenseCertification = licenseCertificationRepository
                     .findById(requestLicenseCertification.getLicense_certification_id())
@@ -52,5 +56,12 @@ public class ParticipantLicenseCertificationRestController {
 
         }
         return CustomResponse.generate(HttpStatus.NOT_FOUND, "Participant not found");
+    }
+
+    @GetMapping("certifications")
+    public ResponseEntity<Object> get() {
+        List<ParticipantLicenseCertification> certifications = participantLicenseCertificationRepository.getIdParticipant(1);
+
+        return CustomResponse.generate(HttpStatus.OK, "Data Successfully Fetched", certifications);
     }
 }

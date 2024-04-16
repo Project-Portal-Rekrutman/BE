@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.example.Portal_Recruitment.dto.RequestEducation;
 import com.example.Portal_Recruitment.model.ParticipantEducation;
 
 @Repository
