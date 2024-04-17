@@ -71,7 +71,7 @@ public class ApplyRestController {
         jwtToken = requestTokenHeader.substring(7);
         username = jwtTokenUtil.getUsernameFromToken(jwtToken);
         com.example.Portal_Recruitment.model.User user = userRepository.getrole(username);
-        if (user.getRole().getName().equals("admin") || user.getRole().getName().equals("recruiter")) {
+        if (user.getRole().getName().equals("admin") || user.getRole().getName().equals("hr")) {
             return CustomResponse.generate(HttpStatus.OK, "Data Successfully Fetched", applyRepository.findAll());
         }else{
             Participant participant = participantRepository.findUser(user.getEmail());
