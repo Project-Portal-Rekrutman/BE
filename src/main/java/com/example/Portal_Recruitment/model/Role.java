@@ -22,11 +22,15 @@ public class Role {
 
     @Column(name = "name")
     private String name;
-
+   
     @JsonIgnore
     @OneToMany(mappedBy = "role")
-    private Set<User> users;
+    private Set<RoleUser> roleUsers;
 
+
+    // @JsonIgnore
+    // @OneToMany(mappedBy = "role")
+    // private Set<User> users;
     public Integer getId() {
         return id;
     }
@@ -43,13 +47,15 @@ public class Role {
         this.name = name;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public Set<RoleUser> getRoleUsers() {
+        return roleUsers;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setRoleUsers(Set<RoleUser> roleUsers) {
+        this.roleUsers = roleUsers;
     }
+
+  
 
     
 }
